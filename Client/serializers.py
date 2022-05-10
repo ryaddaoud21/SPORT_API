@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from .models import Person
-import easyocr
-import numpy as np
-import cv2
+
 
 
 class PesronSerializer(serializers.ModelSerializer):
@@ -32,8 +30,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
-import pytesseract
-from PIL import Image
 
 
 class PesronSerializer(serializers.ModelSerializer):
