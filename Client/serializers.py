@@ -59,7 +59,7 @@ class PesronSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # mooon = cv2.imread(File)
-
+        '''
         File = validated_data['Image']
         mooon = cv2.imdecode(np.fromstring(File.read(), np.uint8), cv2.IMREAD_UNCHANGED)
 
@@ -68,7 +68,7 @@ class PesronSerializer(serializers.ModelSerializer):
         print(len(result))
         print(result[0])
         print(result[0][1])
-
+        '''
         user = User.objects.create(
             username=validated_data['Username'],
             email=validated_data['Email'],
