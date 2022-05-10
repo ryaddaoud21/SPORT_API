@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border="1" class="table is-fullwidth is-striped is-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Train</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>BMR</th>
+        <th>TDEE</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for client in clients %}
+    <tr>
+
+        <td>{{ client.id }}</td>
+        <td>{{ client.Name }}</td>
+        <td>{{ client.Age }}</td>
+        <td>{{ client.Gender }}</td>
+        <td>{{ client.Train }}</td>
+        <td>{{ client.Weight }}</td>
+        <td>{{ client.Height }}</td>
+        <td>{{ client.Calculate_BMR }}</td>
+        <td>{{ client.Calculate_TDEE }}</td>
+        <td>{{ client.Image.url }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
