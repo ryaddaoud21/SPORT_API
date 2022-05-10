@@ -8,7 +8,6 @@ django-filter==21.1
 django-heroku==0.3.1
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.1.0
-easyocr==1.4.2
 gunicorn==20.1.0
 idna==3.3
 imageio==2.16.2
@@ -33,6 +32,7 @@ scipy==1.8.0
 six==1.16.0
 sqlparse==0.4.2
 tifffile==2022.4.8
+torchvision==0.12.0
 typing_extensions==4.1.1
 tzdata==2022.1
 urllib3==1.26.9
