@@ -37,8 +37,9 @@ class PesronSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ['Name', 'Username', 'Age', 'Sport', 'Email', 'Gender', 'Train', 'Weight', 'Height', 'Hours', 'Effort',
+        fields = ['id','Name', 'Username', 'Age', 'Sport', 'Email', 'Gender', 'Train', 'Weight', 'Height', 'Hours', 'Effort',
                   'Goal_Type', 'Goal_Weight', 'Calculate_BMR', 'Calculate_TDEE', 'Password', 'password2', 'Image','In_body']
+
 
         extra_kwargs = {
             'Name': {'required': True},
