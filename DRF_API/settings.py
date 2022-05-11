@@ -32,11 +32,17 @@ ALLOWED_HOSTS = ['django-sport-api.herokuapp.com','127.0.0.1']
 REST_FRAMEWORK = {
 
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.DjangoModelPermissions',
+        'rest_framework.permissions.IsAuthenticated',
+
+
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
+
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+
     )
 }
 

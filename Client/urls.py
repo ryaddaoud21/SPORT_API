@@ -1,6 +1,7 @@
 from django.urls import include, path
 
 from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 
 from .views import *
 from rest_framework_simplejwt.views import (
@@ -9,15 +10,17 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework.routers import DefaultRouter
 
-
+from .views import *
 router = routers.DefaultRouter()
 router.register(r'people', PersonViewSet)
 
 urlpatterns = [
-   path('', include(router.urls)),
+   path('api/', include(router.urls)),
    path('api-auth/', include('rest_framework.urls')),
    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+   path('', PersonList.as_view()),
+   path('persons/<int:pk>', PersonList.as_view()),
 
 ]
 router = DefaultRouter()

@@ -1,4 +1,10 @@
+from django.http import JsonResponse
+from requests import Response
 from rest_framework import serializers
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Person
 
 
@@ -34,7 +40,6 @@ from rest_framework.validators import UniqueValidator
 
 class PesronSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True, required=True)
-
     class Meta:
         model = Person
         fields = ['id','Name', 'Username', 'Age', 'Sport', 'Email', 'Gender', 'Train', 'Weight', 'Height', 'Hours', 'Effort',
@@ -73,6 +78,7 @@ class PesronSerializer(serializers.ModelSerializer):
 
         )
         person = Person.objects.create(
+
             Name=validated_data['Name'],
             Username=validated_data['Username'],
             Age=validated_data['Age'],
@@ -88,12 +94,13 @@ class PesronSerializer(serializers.ModelSerializer):
             Goal_Type=validated_data['Goal_Type'],
             Goal_Weight=validated_data['Goal_Weight'],
             Image=validated_data['Image'],
-            Inbody=result[0][1],
+            Inbody=0,
 
         )
         user.set_password(validated_data['Password'])
         user.save()
         person.save()
+
 
         return person
 
