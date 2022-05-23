@@ -19,10 +19,11 @@ urlpatterns = [
    path('api-auth/', include('rest_framework.urls')),
    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-   path('', PersonList.as_view()),
-   path('persons/<int:pk>', PersonList.as_view()),
+   path('', PersonList.as_view(),name='persons'),
+   path('change_password/<int:pk>/', ChangePasswordView.as_view(), name='auth_change_password'),
 
 ]
 router = DefaultRouter()
 router.register(r"user",UserViewSet, basename="user")
+router.register(r"person",PersonViewSet, basename="person")
 urlpatterns += router.urls

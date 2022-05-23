@@ -1,23 +1,13 @@
-from asyncio import exceptions
-from contextvars import Token
 
-from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.contrib.auth.models import User
-from django.http import Http404
-from django.shortcuts import render
-from requests import auth
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, permissions, authentication, generics, status, views
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.exceptions import ValidationError
-from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
-
 from .models import Person
-from .serializers import PesronSerializer
-import json
-from rest_framework.response import Response
+from .serializers import PesronSerializer,ChangePasswordSerializer
 
 class PersonViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
@@ -42,6 +32,14 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+
+class PersonViewSet(viewsets.ModelViewSet):
+    """
+    UserModel View.
+    """
+    permission_classes = (IsAuthenticated,)
+    serializer_class = PesronSerializer
+    queryset = Person.objects.all()
 
 
 @api_view(['GET'])
@@ -82,4 +80,19 @@ class PersonList(APIView,):
         print(user.id)
 
         serializer = PesronSerializer(person)
+        print(serializer.data)
+
         return Response(serializer.data)
+
+
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ChangePasswordSerializer
+
+
+
+
