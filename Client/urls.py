@@ -20,7 +20,7 @@ urlpatterns = [
    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
    path('', PersonList.as_view(),name='persons'),
-   path('change_password/<int:pk>/', ChangePasswordView.as_view(), name='auth_change_password'),
+   path('change-password/', ChangePasswordView.as_view(), name='change-password'),
 
 ]
 router = DefaultRouter()
