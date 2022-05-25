@@ -30,7 +30,7 @@ class Person(models.Model):
       ('3', '1 Kgs'),
 
    ]
-
+   id = models.AutoField(primary_key=True,blank=True)
    Name = models.CharField(max_length=100,blank=False,help_text="Enter your Full name")
    Username = models.CharField(max_length=100,blank=False ,help_text="Username")
    Age = models.IntegerField(blank=False, null=True)

@@ -5,14 +5,21 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, permissions, authentication, generics, status, views
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 from .models import Person
-from .serializers import PesronSerializer,ChangePasswordSerializer
+from .serializers import PesronSerializer,ChangePasswordSerializer,RegisterSerializer
+from rest_framework.permissions import AllowAny
 
 class PersonViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     queryset = Person.objects.all()
     serializer_class = PesronSerializer
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
 
 
 
@@ -26,17 +33,13 @@ from .serializers import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    UserModel View.
-    """
+
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
 
 class PersonViewSet(viewsets.ModelViewSet):
-    """
-    UserModel View.
-    """
+
     permission_classes = (IsAuthenticated,)
     serializer_class = PesronSerializer
     queryset = Person.objects.all()
@@ -64,10 +67,6 @@ class PersonList(APIView,):
     def get(self, request, format=None):
         id = request.user.id
         username = request.user.username
-        print(id)
-        print(username)
-
-
         try:
             user = User.objects.get(pk=id)
             person = Person.objects.get(Username=username)
@@ -77,12 +76,13 @@ class PersonList(APIView,):
         except Person.DoesNotExist:
             person = None
 
-        print(user.id)
-
         serializer = PesronSerializer(person)
-        print(serializer.data)
+        print(serializer.data.get(id))
 
-        return Response(serializer.data)
+        id =serializer.data['id']
+        print(id)
+
+        return JsonResponse(id,safe=False)
 
 
 

@@ -21,6 +21,7 @@ urlpatterns = [
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
    path('', PersonList.as_view(),name='persons'),
    path('change-password/', ChangePasswordView.as_view(), name='change-password'),
+   path('register/', RegisterView.as_view(), name='auth_register'),
 
 ]
 router = DefaultRouter()
