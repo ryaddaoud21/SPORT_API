@@ -76,6 +76,7 @@ MIDDLEWARE = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'DRF_API.urls'
+os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [
     {
