@@ -1,8 +1,9 @@
 
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets, permissions, authentication, generics, status, views
+from rest_framework import viewsets, permissions, authentication, generics, status, views, serializers
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.generics import get_object_or_404
@@ -54,6 +55,7 @@ class PersonList(APIView,):
     serializer_class = PesronSerializer
     http_method_names = ['get']
 
+    '''
     @csrf_exempt
     def get(self, request, format=None):
         id = request.user.id
@@ -73,7 +75,7 @@ class PersonList(APIView,):
         id =serializer.data['id']
         print(id)
 
-        return JsonResponse(id,safe=False)
+        return JsonResponse(id,safe=False)'''
 
 
 
@@ -113,3 +115,36 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+from .forms import *
+from .serializers import PesronSerializer
+
+def login(request):
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('Username')
+            raw_password = form.cleaned_data.get('Password')
+            print(username)
+            print(raw_password)
+            user = Person.objects.filter(Username=username).get()
+            id = user.id
+            if not user:
+                responseData = {
+                    'Error':'this person does not exist',
+                }
+                return JsonResponse(responseData)
+            else:
+
+                responseData = {
+                    'id': id,
+                }
+                return JsonResponse(responseData)
+
+
+    else:
+        form = PersonForm()
+
+    context = {'form': form}
+
+    return render(request,"Client/Login.html",context)

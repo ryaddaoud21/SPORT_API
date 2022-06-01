@@ -22,6 +22,7 @@ urlpatterns = [
    path('', PersonList.as_view(),name='persons'),
    path('change-password/', ChangePasswordView.as_view(), name='change-password'),
    path('register/', RegisterView.as_view(), name='auth_register'),
+   path('login/', login, name='login'),
 
 ]
 router = DefaultRouter()
