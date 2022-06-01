@@ -8,7 +8,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
-from .models import Person
+from .models import Person,Add
 from .serializers import PesronSerializer,ChangePasswordSerializer,RegisterSerializer
 from rest_framework.permissions import AllowAny
 
@@ -30,7 +30,7 @@ factory = APIRequestFactory()
 from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .serializers import UserSerializer
+from .serializers import UserSerializer,Addserializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -47,6 +47,11 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 
 
+class AddViewSet(viewsets.ModelViewSet):
+
+    permission_classes = (AllowAny,)
+    serializer_class = Addserializer
+    queryset = Add.objects.all()
 
 
 class PersonList(APIView,):

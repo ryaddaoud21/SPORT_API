@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
-from .models import Person
+from .models import Person,Add
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -16,6 +16,12 @@ class PesronSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
+        fields = "__all__"
+
+
+class Addserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Add
         fields = "__all__"
 
 

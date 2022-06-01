@@ -23,11 +23,12 @@ urlpatterns = [
    path('change-password/', ChangePasswordView.as_view(), name='change-password'),
    path('register/', RegisterView.as_view(), name='auth_register'),
    path('login/', login, name='login'),
-   path('change/', change_password, name='change'),
-   path('add/', adds, name='change'),
+   path('change/', change_password, name='changepassword'),
+   path('add/', adds, name='add'),
 
 ]
 router = DefaultRouter()
+router.register("addlist",AddViewSet, basename="addlist")
 router.register(r"user",UserViewSet, basename="user")
 router.register(r"person",PersonViewSet, basename="person")
 urlpatterns += router.urls
