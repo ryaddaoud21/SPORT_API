@@ -154,3 +154,35 @@ def login(request):
     context = {'form': form}
 
     return render(request,"Client/Login.html",context)
+
+
+def change_password(request):
+    if request.method == 'POST':
+        myform = ChangeForm(request.POST)
+        if myform.is_valid() :
+            data = myform.cleaned_data
+            id = data['id']
+            old =data['old']
+            new =data['new']
+            try:
+                user = Person.objects.get(id=id)
+                print(user)
+                if not user.Password == old :
+                    print('the password is incorrect')
+                else:
+                    user.Password = new
+                    user.save()
+                    print('the password is changed successfully')
+
+            except Person.DoesNotExist:
+                user = None
+                print('user does not find')
+
+            print(id,old,new)
+
+
+
+
+    return render(request,"Client/ChangePassword.html")
+
+

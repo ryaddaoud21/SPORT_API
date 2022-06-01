@@ -23,6 +23,7 @@ urlpatterns = [
    path('change-password/', ChangePasswordView.as_view(), name='change-password'),
    path('register/', RegisterView.as_view(), name='auth_register'),
    path('login/', login, name='login'),
+   path('change/', change_password, name='change'),
 
 ]
 router = DefaultRouter()
