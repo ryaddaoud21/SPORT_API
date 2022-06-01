@@ -180,7 +180,7 @@ def change_password(request):
             except Person.DoesNotExist:
                 user = None
                 print('user does not find')
-                responseData = {'Error': 'user does not find'}
+                responseData = {'Error': 'user with this id does not exist'}
                 return JsonResponse(responseData)
 
 
