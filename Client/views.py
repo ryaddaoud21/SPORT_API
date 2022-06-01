@@ -169,18 +169,19 @@ def change_password(request):
                 print(user)
                 if not user.Password == old :
                     print('the password is incorrect')
+                    responseData = {'Error': 'the password is incorrect',}
+                    return JsonResponse(responseData)
                 else:
                     user.Password = new
                     user.save()
                     print('the password is changed successfully')
-
+                    responseData = {'the password is changed successfully', }
+                    return JsonResponse(responseData)
             except Person.DoesNotExist:
                 user = None
                 print('user does not find')
-
-            print(id,old,new)
-
-
+                responseData = {'user does not find', }
+                return JsonResponse(responseData)
 
 
     return render(request,"Client/ChangePassword.html")
