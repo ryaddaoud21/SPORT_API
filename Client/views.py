@@ -21,7 +21,7 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
-
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.response import Response
 from rest_framework.test import APIRequestFactory
@@ -45,25 +45,16 @@ class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
 
 
-@api_view(['GET'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
-@permission_classes([IsAuthenticated])
-def example_view(request, format=None):
-    content = {
-        'user': str(request.user),  # `django.contrib.auth.User` instance.
-        'auth': str(request.auth),  # None
-    }
-    return Response(content)
-
-
 
 
 
 class PersonList(APIView,):
+
     permission_classes = (IsAuthenticated,)
     serializer_class = PesronSerializer
     http_method_names = ['get']
 
+    @csrf_exempt
     def get(self, request, format=None):
         id = request.user.id
         username = request.user.username
@@ -94,11 +85,13 @@ class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
     model = User
 
+
+    @csrf_exempt
     def get_object(self, queryset=None):
         obj = self.request.user
         print(obj)
         return obj
-
+    @csrf_exempt
     def update(self, request, *args, **kwargs):
         self.object = self.get_object()
         serializer = self.get_serializer(data=request.data)
@@ -120,5 +113,3 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

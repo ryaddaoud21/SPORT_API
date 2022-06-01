@@ -16,7 +16,7 @@ class PesronSerializer(serializers.ModelSerializer):
         fields = ('Name', 'Username','Age','Sport', 'Email','Gender', 'Train','Weight','Height', 'Hours','Effort','Goal_Type' , 'Goal_Weight' , 'Password','Image')
 
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 
 
 class UserSerializer(serializers.ModelSerializer):
