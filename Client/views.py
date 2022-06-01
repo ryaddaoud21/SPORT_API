@@ -147,4 +147,4 @@ def login(request):
 
     context = {'form': form}
 
-    return render(request,"Client/Login.html",context)
+    return render(request,"Templates/Client/Login.html",context)
