@@ -84,3 +84,14 @@ class Person(models.Model):
          TDEE = self.Calculate_BMR()*2.2
 
       return TDEE
+
+class Add(models.Model):
+
+   user_id = models.CharField(max_length=100,blank=False )
+   add = models.CharField(max_length=100,blank=False )
+   target = models.CharField(max_length=100,blank=False )
+   duration = models.CharField(max_length=100,blank=False )
+
+
+   def __str__(self):
+      return self.user_id

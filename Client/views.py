@@ -187,3 +187,14 @@ def change_password(request):
     return render(request,"Client/ChangePassword.html")
 
 
+def adds(request):
+    if request.method == 'POST':
+        form = Addform(request.POST)
+        if form.is_valid():
+            form.save()
+            data = form.cleaned_data
+            return JsonResponse(data)
+    else:
+        form = Addform()
+    context = {'form': form}
+    return render(request,"Client/Adds.html",context)

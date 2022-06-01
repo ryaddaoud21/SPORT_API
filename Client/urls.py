@@ -24,6 +24,7 @@ urlpatterns = [
    path('register/', RegisterView.as_view(), name='auth_register'),
    path('login/', login, name='login'),
    path('change/', change_password, name='change'),
+   path('add/', adds, name='change'),
 
 ]
 router = DefaultRouter()
