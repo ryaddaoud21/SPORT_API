@@ -118,6 +118,8 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 from .forms import *
 from .serializers import PesronSerializer
+from django.shortcuts import get_object_or_404
+
 
 def login(request):
     if request.method == 'POST':
@@ -127,15 +129,19 @@ def login(request):
             raw_password = form.cleaned_data.get('Password')
             print(username)
             print(raw_password)
-            user = Person.objects.filter(Username=username).get()
-            id = user.id
+            try:
+                user = Person.objects.get(Username=username,Password=raw_password)
+            except Person.DoesNotExist:
+                user = None
+
+
             if not user:
                 responseData = {
                     'Error':'this person does not exist',
                 }
                 return JsonResponse(responseData)
             else:
-
+                id = user.id
                 responseData = {
                     'id': id,
                 }

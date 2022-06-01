@@ -25,7 +25,6 @@ SECRET_KEY = 'django-insecure-q(id-%7cbp+xtr#jp5g2uay8su846ld4(om-+(^sq@xmsk$4jj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['django-sport-api.herokuapp.com','127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ["https://pacific-coast-78888.herokuapp.com"]
 
 # Application definition
 
@@ -64,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
