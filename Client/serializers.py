@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 class PesronSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ('id','Name', 'Username','Age','Sport', 'Email','Gender', 'Train','Weight','Height', 'Hours','Effort','Goal_Type' , 'Goal_Weight' , 'Password','Image')
+        fields = ('id','Name', 'Username','Age','Sport', 'Email','Gender', 'Train','Weight','Height', 'Hours','Effort','Goal_Type' , 'Goal_Weight','Calculate_BMR', 'Calculate_TDEE' , 'Password','Image')
 
 
 class UserSerializer(serializers.ModelSerializer):
