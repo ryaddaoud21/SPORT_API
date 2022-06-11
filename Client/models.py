@@ -95,3 +95,13 @@ class Add(models.Model):
 
    def __str__(self):
       return self.user_id
+
+
+
+class AddWeight(models.Model):
+
+   id_user = models.CharField(max_length=100,blank=False )
+   weight = models.IntegerField()
+
+   def __str__(self):
+      return self.id

@@ -25,6 +25,7 @@ urlpatterns = [
    path('login/', login, name='login'),
    path('change/', change_password, name='changepassword'),
    path('add/', adds, name='add'),
+   path('addweight/', add_weight, name='addweight'),
 
 ]
 router = DefaultRouter()

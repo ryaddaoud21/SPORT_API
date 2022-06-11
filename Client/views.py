@@ -41,7 +41,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class PersonViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = PesronSerializer
     queryset = Person.objects.all()
 
@@ -56,7 +56,7 @@ class AddViewSet(viewsets.ModelViewSet):
 
 class PersonList(APIView,):
 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = PesronSerializer
     http_method_names = ['get']
 
@@ -203,3 +203,15 @@ def adds(request):
         form = Addform()
     context = {'form': form}
     return render(request,"Client/Adds.html",context)
+
+def add_weight(request):
+    if request.method == 'POST':
+        form = AddWeightform(request.POST)
+        if form.is_valid():
+            form.save()
+            data = form.cleaned_data
+            return JsonResponse(data)
+    else:
+        form = AddWeightform()
+    context = {'form': form}
+    return render(request,"Client/Addweight.html",context)

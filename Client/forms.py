@@ -17,8 +17,14 @@ class ChangeForm(forms.Form):
     old = forms.CharField(label='old', max_length=100)
     new = forms.CharField(label='new', max_length=100)
 
+
 class Addform(forms.ModelForm):
     class Meta :
         model = Add
+        fields = '__all__'
+
+class AddWeightform(forms.ModelForm):
+    class Meta :
+        model = AddWeight
         fields = '__all__'
 
