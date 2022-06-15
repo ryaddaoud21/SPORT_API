@@ -52,7 +52,7 @@ class Person(models.Model):
       return self.Name
 
    def Calculate_BMR(self):
-      if self.GENDER == "M":
+      if self.GENDER == "F":
          BMR = (10 * self.Weight) + (6.25 * self.Height) + (-5 * self.Age) + 5
       else:
          BMR = (10 * self.Weight) + (6.25 * self.Height) + (-5 * self.Age) - 161
